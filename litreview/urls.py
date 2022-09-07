@@ -2,8 +2,10 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import path
 import flux.views
-from user.views import signup
+import follower.views
+from user.views import signup_page
 import user.views
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -13,5 +15,8 @@ urlpatterns = [
         redirect_authenticated_user=True),
         name='login'),
     path("logout", user.views.logout_user, name="logout"),
-    path('signup/', authentication.views.signup_page, name='signup'),
+    path('signup/', user.views.signup_page, name='signup'),
+    path('flux/', flux.views.flux, name='flux'),
+    path('posts/', flux.views.posts, name='posts'),
+    path('followers/', follower.views.followers, name='followers'),
 ]
