@@ -1,9 +1,10 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import path
 import flux.views
 import follower.views
-from user.views import signup_page
 import user.views
 
 
@@ -19,4 +20,8 @@ urlpatterns = [
     path('flux/', flux.views.flux, name='flux'),
     path('posts/', flux.views.posts, name='posts'),
     path('followers/', follower.views.followers, name='followers'),
+    path('image/upload/', flux.views.image_upload, name='image_upload'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
