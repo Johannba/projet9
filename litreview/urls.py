@@ -20,7 +20,7 @@ urlpatterns = [
     path('flux/', flux.views.flux, name='flux'),
     path('posts/', flux.views.posts, name='posts'),
     path('followers/', follower.views.followers, name='followers'),
-    path('image/upload/', flux.views.image_upload, name='image_upload'),
+    path('create_ticket/', flux.views.create_ticket, name='create_ticket'),
 ]
 
 if settings.DEBUG:

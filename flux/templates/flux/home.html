@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Image</h2>
-    {% for photo in photos %}
-        <img src="{{ photo.image.url }}">
-        <p>{{ photo.caption }}</p>
+    <div class="align-items-center">
+    {% for ticket in tickets %}
+        <div class="card w-75">
+          <div class="card-body">
+              <h2>{{ ticket.title }}</h2>
+              <p class="card-text">{{ ticket.description }}</p>
+          </div>
+            <img class="card-img-bottom" src="{{ ticket.image.url }}" alt="Card image cap">
+        </div>
     {% endfor %}
+    </div>
 {% endblock content %}
 

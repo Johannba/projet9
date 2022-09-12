@@ -4,23 +4,25 @@ from . import forms
 from . import models
 
 
+
+
 @login_required
-def image_upload(request):
-    form = forms.PhotoForm()
+def create_ticket(request):
+    form = forms.TicketForm()
     if request.method == 'POST':
-        form = forms.PhotoForm(request.POST, request.FILES)
+        form = forms.TicketForm(request.POST, request.FILES)
         if form.is_valid():
-            photo = form.save(commit=False)
-            photo.uploader = request.user
-            photo.save()
+            image = form.save(commit=False)
+            image.uploader = request.user
+            image.save()
             return redirect("home")
     return render(request, 'flux/image_upload.html', context={'form': form})
 
-
 @login_required
 def home(request):
-    image = models.Image.objects.all()
-    return render(request, 'flux/home.html', context={'image': image})
+    tickets = models.Ticket.objects.all()
+    print(tickets[0].title)
+    return render(request, 'flux/home.html', context={'tickets': tickets})
 # Create your views here.
 
 
