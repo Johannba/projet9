@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
-
-<head>
-    <meta charset="UTF-8">
-    <title>Flux</title>
-</head>
-<body>
-
-</body>
-</html>
+{% block content %}
+<button type="submit" style="width: 10rem;">Demander un critique</button><button type="submit" >Créer un critique</button>
+    <div class="mx-auto text-center" style="width: 50rem;">
+        <br><br>
+    {% for ticket in tickets %}
+        <div class="card w-75">
+          <div class="card-body">
+              <h2>{{ ticket.title }}</h2>
+              <br><br>
+              <p class="card-text">{{ ticket.description }}</p>
+          </div>
+            <img class="card-img-bottom" src="{{ ticket.image.url }}" alt="Card image cap">
+        </div>
+    {% endfor %}
+{% endblock content %}

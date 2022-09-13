@@ -1,9 +1,13 @@
 {% extends 'base.html'%}
 {% block content %}
-    <h2>Télécharger une photo</h2>
-    <form method="post" enctype="multipart/form-data">
-        {{ form.as_p }}
+    <h2 class="text-center">Créer un ticket</h2>
+<br>
+    <form  method="post" enctype="multipart/form-data">
+        <table>
+        {{ form.as_table }}
         {% csrf_token %}
-        <button type="submit" >Publier</button>
+        </table>
+        <button type="submit" >Envoyer</button>
+        <br>
     </form>
 {% endblock content %}

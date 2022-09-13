@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>Créer un ticket</h3>
+    <form method="post" enctype="multipart/form-data">
+        {{ ticket_form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >Envoyer</button>
+    </form>
+{% endblock content %}
+<p><a href="{% url 'home' %}">Accueil</a></p>
+<p><a href="{% url 'blog_create' %}">Écrire un billet</a></p>
+<p><a href="{% url 'photo_upload' %}">Télécharger une photo</a></p>

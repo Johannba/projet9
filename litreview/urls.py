@@ -10,14 +10,13 @@ import user.views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('home/', flux.views.home, name='home'),
+    path('flux/', flux.views.flux, name='flux'),
     path('', LoginView.as_view(
         template_name='user/login.html',
         redirect_authenticated_user=True),
         name='login'),
     path("logout", user.views.logout_user, name="logout"),
     path('signup/', user.views.signup_page, name='signup'),
-    path('flux/', flux.views.flux, name='flux'),
     path('posts/', flux.views.posts, name='posts'),
     path('followers/', follower.views.followers, name='followers'),
     path('create_ticket/', flux.views.create_ticket, name='create_ticket'),

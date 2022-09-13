@@ -15,15 +15,9 @@ def create_ticket(request):
             image = form.save(commit=False)
             image.uploader = request.user
             image.save()
-            return redirect("home")
+            return redirect("flux")
     return render(request, 'flux/image_upload.html', context={'form': form})
 
-@login_required
-def home(request):
-    tickets = models.Ticket.objects.all()
-    print(tickets[0].title)
-    return render(request, 'flux/home.html', context={'tickets': tickets})
-# Create your views here.
 
 
 def posts(request):
@@ -31,6 +25,7 @@ def posts(request):
 
 
 def flux(request):
-    return render(request, 'flux/flux.html')
+    tickets = models.Ticket.objects.all()
+    return render(request, 'flux/flux.html', context={'tickets': tickets})
 
 
