@@ -1,7 +1,4 @@
 from django import forms
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
-
 from . import models
 
 
@@ -11,7 +8,13 @@ class TicketForm(forms.ModelForm):
         fields = ['title', 'description', 'image']
 
 
+class ReviewForm(forms.ModelForm):
+    choice_value = [('1', '- 1'), ('2', '- 2'), ('3', '- 3'), ('4', '- 4'), ('5', '- 5')]
+    rating = forms.ChoiceField(label='Noté', widget=forms.RadioSelect, choices=choice_value)
 
+    class Meta:
+        model = models.Review
+        fields = ['headline', 'body', 'rating']
 
 
 

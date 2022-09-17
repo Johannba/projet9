@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<button type="submit" style="width: 10rem;">Demander un critique</button><button type="submit" >Créer un critique</button>
-    <div class="mx-auto text-center" style="width: 50rem;">
+<div class="text-center">
+    <a href="{% url 'create_ticket' %}"><button type="submit " style="width: 12rem;">Demander une critique</button></a>
+    <a href="{% url 'create_ticket' %}"><button type="submit" style="width: 12rem;">Créer un critique</button></a>
+</div>
+    <div class="mx-auto text-center" style="width: 60rem; margin-left: 30px ">
         <br><br>
     {% for ticket in tickets %}
         <div class="card w-75">

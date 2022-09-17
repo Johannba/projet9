@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{% block content %}
+    <h2 class="text-center">Créer une critique</h2>
+<br>
+    <form  method="post" enctype="multipart/form-data">
+        <table>
+        {{ form.as_table }}
+        {% csrf_token %}
+        </table>
+        <button type="submit" >Envoyer</button>
+        <br>
+    </form>
+{% endblock content %}
