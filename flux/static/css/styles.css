@@ -1,5 +1,30 @@
 
-input, textarea {
+
+#id_headline, #id_title, textarea {
     display: block;
     padding: .75rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius : .25rem;
+    min-width: 600px;
+}
+
+#id_rating{
+    display: flex;
+    align-items: center;
+    padding: .75rem;
+}
+
+#id_rating_0, #id_rating_1, #id_rating_2, #id_rating_3, #id_rating_4, #id_rating_5{
+    width: 60px;
+}
+
+.button{
+    display:block;
+    margin-left: 270px;
+}
+
+.button-flux{
+    margin-left: 270px;
 }

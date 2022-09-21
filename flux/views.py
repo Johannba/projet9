@@ -10,9 +10,9 @@ def create_ticket(request):
     if request.method == 'POST':
         form = forms.TicketForm(request.POST, request.FILES)
         if form.is_valid():
-            image = form.save(commit=False)
-            image.uploader = request.user
-            image.save()
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
             return redirect("flux")
     return render(request, 'flux/image_upload.html', context={'form': form})
 
@@ -44,3 +44,15 @@ def review_flux(request):
     reviews = models.Review.objects.all()
     return render(request, 'flux/review_form.html', context={'reviews': reviews})
 
+
+def response_ticket(request, ticket_id):
+    form = forms.ReviewForm()
+    if request.method == 'POST':
+        form = forms.ReviewForm(request.POST, request.FILES)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.ticket = models.Ticket.objects.get(pk=ticket_id)
+            review.save()
+            return redirect("review_form")
+    return render(request, 'flux/create_review.html', context={'form': form})
