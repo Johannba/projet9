@@ -10,11 +10,11 @@ class TicketForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
     choice_value = [('1', '- 1'), ('2', '- 2'), ('3', '- 3'), ('4', '- 4'), ('5', '- 5')]
-    rating = forms.ChoiceField(label='Noté', widget=forms.RadioSelect, choices=choice_value)
+    rating = forms.ChoiceField(label='Note', widget=forms.RadioSelect, choices=choice_value)
 
     class Meta:
         model = models.Review
-        fields = ['headline', 'body', 'rating']
+        fields = ['headline', 'rating', 'body', ]
 
 
 
