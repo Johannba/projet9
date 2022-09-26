@@ -1,9 +1,39 @@
 {% extends 'base.html' %}
-<head>
-    <meta charset="UTF-8">
-    <title>Posts</title>
-</head>
-<body>
+{% block content %}
 
-</body>
-</html>
+        <br><br>
+    {% for post in posts %}
+<div class="container-flux">
+    <div class="row justify-content-center">
+        {% if post.contente_type == "TICKET" %}
+        <div class="col-7 mt-4">
+            <div class="card w-75">
+              <div class="card-body">
+                <h2 class="text-center">{{ post.title }}</h2>
+              <br><br>
+              <p class="text-center">{{ post.description }}</p>
+                <img class="card-img-bottom" src="{{ post.image.url }}" alt="Card image cap">
+                  <!-- IF ticket.is_reviwed-->
+                <a class="button-flux" href="{% url 'response_ticket' post.id %}"><button type="submit " >Créer une critique</button></a>
+              </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if post.contente_type == "REVIEW" %}
+        <div class="col-7 mt-4">
+            <div class="card w-75">
+              <div class="card-body">
+                  <h2 class="text-center">{{ post.headline }}  {{ post.rating }}</h2>
+                <h2 class="text-center">{{ post.ticket.title }}</h2>
+              <br><br>
+              <p class="text-center">{{ post.ticket.description }}</p>
+                <img class="card-img-bottom" src="{{ post.ticket.image.url }}" alt="Card image cap">
+                <a class="button-flux" href="{% url 'response_ticket' post.ticket.id %}"><button type="submit " >Créer une critique</button></a>
+              </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+    {% endfor %}
+{% endblock content %}

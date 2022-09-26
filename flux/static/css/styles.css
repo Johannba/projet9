@@ -21,28 +21,32 @@
 }
 
 .button-flux{
-    margin-left: 270px;
+    margin-left: 20rem;
 }
 
 .critique{
     margin-left: 22rem;
 }
 
-.button-review{
-     30rem;
-}
-
 .button-critique-flux{
-    margin-left: 3rem;
+    margin-left: 5rem;
 }
 
 .container-flux{
    margin-left: 10rem;
 }
 
-.button-review{
+.button-review {
     margin: 1em auto;
     margin-left: 36rem;
     border-radius : .30rem;
     min-width: 6rem;
+}
+
+h2.créer-une-critique{
+    margin-left: 12rem;
+}
+
+.livre-article{
+    margin-left: -2rem;
 }
