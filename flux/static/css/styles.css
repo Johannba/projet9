@@ -1,5 +1,4 @@
 
-
 #id_headline, #id_title, textarea {
     display: block;
     padding: .75rem;
@@ -21,7 +20,7 @@
 }
 
 .button-flux{
-    margin-left: 20rem;
+    margin-left: 30rem;
 }
 
 .critique{
@@ -29,11 +28,11 @@
 }
 
 .button-critique-flux{
-    margin-left: 5rem;
+    margin-left: 6rem;
 }
 
 .container-flux{
-   margin-left: 10rem;
+   margin-left: 17rem;
 }
 
 .button-review {
@@ -49,4 +48,15 @@ h2.créer-une-critique{
 
 .livre-article{
     margin-left: -2rem;
+}
+
+.card-body{
+     border: 1px solid black;
+     padding: 5px;
+ }
+
+text-titre{
+         display: block;
+         width: 25%;
+         text-align : right;
 }

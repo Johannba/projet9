@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from itertools import chain
 from . import forms
 from . import models
+from .models import Ticket
 
 
 @login_required
@@ -82,10 +83,10 @@ def ticket_review(request):
         if all([ticket_form.is_valid(), review_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
-            ticket = ticket.save()
+            ticket_save = ticket.save()
             review = review_form.save(commit=False)
             review.user = request.user
-            review.ticket = ticket.id
+            review.ticket = ticket
             review.save()
             return redirect("flux")
     context = {
