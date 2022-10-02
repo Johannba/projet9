@@ -17,7 +17,7 @@
         <div class="col-7 mt-4">
             <div class="card w-75">
               <div class="card-body">
-                  <h2 class="text-titre">{{ post.headline }} - {{ post.rating }}</h2>
+                  <h2 class="text-titre">{{ post.headline }} - review {{ post.rating }}</h2>
                   <h3 class="text-titre"> {{ post.body }} </h3>
                     <div class="card-body">
                         <h4 class="text-titre">Ticket - {{ post.ticket.user }}</h4>
@@ -34,3 +34,9 @@
 </div>
     {% endfor %}
 {% endblock content %}
+
+    <h2>{{ ticket.title }}</h2>
+    <p><a href="{% url 'edit_blog' blog.id %}">Modifier le billet</a></p>
+    <img src="{{ blog.photo.image.url }}">
+    <p>{{ blog.photo.caption }}</p>
+    <p>{{ blog.content }}</p>

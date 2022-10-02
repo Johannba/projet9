@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Value, CharField
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from itertools import chain
 from . import forms
 from . import models
@@ -94,3 +94,29 @@ def ticket_review(request):
         'review_form': review_form,
     }
     return render(request, 'flux/ticket_review.html', context=context)
+
+
+@login_required
+def edit_ticket(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    edit_form = forms.TicketForm(instance=ticket)
+    delete_form = forms.TicketFormDelete()
+    if request.method == 'POST':
+        if 'edit_ticket' in request.POST:
+            edit_form = forms.TicketForm(request.POST, instance=ticket)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('flux')
+        if 'delete_ticket' in request.POST:
+            delete_form = forms.TicketFormDelete(request.POST)
+            if delete_form.is_valid():
+                ticket.delete()
+                return redirect('flux')
+    context = {
+        'edit_form': edit_form,
+        'delete_form': delete_form,
+    }
+    return render(
+        request, 'flux/edit_ticket.html', context)
+
+
