@@ -4,7 +4,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from itertools import chain
 from . import forms
 from . import models
-from .models import Ticket
+from .models import Ticket, Review
+from django.views.generic import UpdateView
 
 
 @login_required
@@ -96,27 +97,19 @@ def ticket_review(request):
     return render(request, 'flux/ticket_review.html', context=context)
 
 
+def delete_ticket(request, ticket_id):
+    ticket = Ticket.objects.get(id__exact=ticket_id)
+    ticket.delete()
+    return redirect('posts')
+    if request.POST:
+        username = request.POST['username']
+
+
 @login_required
-def edit_ticket(request, ticket_id):
-    ticket = get_object_or_404(models.Ticket, id=ticket_id)
-    edit_form = forms.TicketForm(instance=ticket)
-    delete_form = forms.TicketFormDelete()
-    if request.method == 'POST':
-        if 'edit_ticket' in request.POST:
-            edit_form = forms.TicketForm(request.POST, instance=ticket)
-            if edit_form.is_valid():
-                edit_form.save()
-                return redirect('flux')
-        if 'delete_ticket' in request.POST:
-            delete_form = forms.TicketFormDelete(request.POST)
-            if delete_form.is_valid():
-                ticket.delete()
-                return redirect('flux')
-    context = {
-        'edit_form': edit_form,
-        'delete_form': delete_form,
-    }
-    return render(
-        request, 'flux/edit_ticket.html', context)
+def edit_ticket(UpdateView):
+    model = Review
+    template_name = "posts/edit_ticket.html"
+    fields = ['headline', 'rating', 'body', ]
+
 
 

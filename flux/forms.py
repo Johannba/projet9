@@ -26,4 +26,3 @@ class ReviewForm(forms.ModelForm):
 
 class ReviewFormDelete(forms.Form):
     delete_review = forms.BooleanField(widget=forms.HiddenInput, initial=True)
-
