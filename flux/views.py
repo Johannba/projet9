@@ -1,11 +1,13 @@
+from django.views.generic import ListView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.db.models import Value, CharField
 from django.shortcuts import redirect, render, get_object_or_404
 from itertools import chain
 from . import forms
 from . import models
+from .forms import ReviewForm
 from .models import Ticket, Review
-from django.views.generic import UpdateView
+
 
 
 @login_required
@@ -106,10 +108,7 @@ def delete_ticket(request, ticket_id):
 
 
 @login_required
-def edit_ticket(UpdateView):
+class EditTicket(UpdateView):
     model = Review
-    template_name = "posts/edit_ticket.html"
+    template_name = "flux/edit_ticket.html"
     fields = ['headline', 'rating', 'body', ]
-
-
-

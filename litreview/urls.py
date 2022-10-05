@@ -24,8 +24,8 @@ urlpatterns = [
     path('review_form/', flux.views.review_flux, name='review_form'),
     path('response_ticket/<int:ticket_id>/', flux.views.response_ticket, name='response_ticket'),
     path('ticket_review', flux.views.ticket_review, name='ticket_review'),
-    path('edit_ticket/<int:ticket_id>/', flux.views.edit_ticket, name='edit_ticket'),
-    path('delete_ticket/<int:ticket_id>/', flux.views.delete_ticket, name='delete_ticket'),
+    path('edit_ticket/<int:pk>/', flux.views.EditTicket.as_view(), name='edit_ticket'),
+    path('delete_ticket/<int:ticket.id>/', flux.views.delete_ticket, name='delete_ticket'),
 ]
 
 if settings.DEBUG:
