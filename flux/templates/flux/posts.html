@@ -24,6 +24,7 @@
                         <h4 class="text-titre">{{ post.ticket.title }}</h4>
                         <img class="card-img-bottom" src="{{ post.ticket.image.url }}" alt="Card image cap">
                         <a class="button-flux" href="{% url 'response_ticket' post.id %}"><button type="submit " >Créer une critique</button></a>
+                        <a class="button-flux" href="{% url 'delete_ticket' post.id %}"><button type="submit " >Supprimer une critique</button></a>
                     </div>
               </div>
             </div>

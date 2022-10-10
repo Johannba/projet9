@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django import forms
+from django.urls import reverse
 
 
 class Ticket(models.Model):
@@ -12,9 +13,13 @@ class Ticket(models.Model):
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(null=True, blank=True, auto_now_add=True)
 
+    def get_absolute_url(self):
+        return reverse('posts')
+
 
 class Review(models.Model):
-    ticket = models.ForeignKey(null=True, blank=True, to=Ticket, on_delete=models.CASCADE)
+    ticket = models.ForeignKey(
+        blank=True, to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)], verbose_name='Note')
     headline = models.CharField(max_length=128, verbose_name='Titre')
@@ -23,3 +28,7 @@ class Review(models.Model):
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=0)
     time_created = models.DateTimeField(null=True, blank=True, auto_now_add=True)
 
+
+
+    def get_absolute_url(self):
+        return reverse('posts')

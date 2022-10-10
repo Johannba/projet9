@@ -1,4 +1,5 @@
-from django.views.generic import ListView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.db.models import Value, CharField
 from django.shortcuts import redirect, render, get_object_or_404
@@ -7,7 +8,6 @@ from . import forms
 from . import models
 from .forms import ReviewForm
 from .models import Ticket, Review
-
 
 
 @login_required
@@ -37,14 +37,14 @@ def create_review(request):
 
 
 
-def posts(request):
+def post(request):
     tickets = models.Ticket.objects.filter(user=request.user)
     reviews = models.Review.objects.filter(user=request.user)
 
     tickets = tickets.annotate(contente_type=Value('TICKET', CharField()))
     reviews = reviews.annotate(contente_type=Value('REVIEW', CharField()))
 
-    posts = sorted(chain(tickets, reviews), key=lambda post: post.time_created, reverse=True)
+    posts = sorted(chain(tickets, reviews), key=lambda x: x.time_created, reverse=True)
     return render(request, 'flux/posts.html', context={'posts': posts})
 
 
@@ -55,7 +55,7 @@ def flux(request):
     tickets = tickets.annotate(contente_type=Value('TICKET', CharField()))
     reviews = reviews.annotate(contente_type=Value('REVIEW', CharField()))
 
-    posts = sorted(chain(tickets, reviews), key=lambda post: post.time_created, reverse=True)
+    posts = sorted(chain(tickets, reviews), key=lambda x: x.time_created, reverse=True)
     return render(request, 'flux/flux.html', context={'posts': posts})
 
 
@@ -99,16 +99,14 @@ def ticket_review(request):
     return render(request, 'flux/ticket_review.html', context=context)
 
 
+class EditReview(UpdateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = "flux/edit_ticket.html"
+    success_url = reverse_lazy("posts")
+
+
 def delete_ticket(request, ticket_id):
     ticket = Ticket.objects.get(id__exact=ticket_id)
     ticket.delete()
     return redirect('posts')
-    if request.POST:
-        username = request.POST['username']
-
-
-@login_required
-class EditTicket(UpdateView):
-    model = Review
-    template_name = "flux/edit_ticket.html"
-    fields = ['headline', 'rating', 'body', ]
