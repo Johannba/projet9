@@ -11,9 +11,24 @@
         </div>
 </div>
         <br><br>
-    {% for post in posts %}
-            <div class="container-flux">
-                <div class="row justify-content-center">
+   {% for post in posts %}
+        <<div class="container-flux">
+        <div class="row justify-content-center">
+        {% if post.contente_type == "TICKET" %}
+            {% if ticket.is_reviewed  %}
+        <div class="col-7 mt-4">
+            <div class="card w-75">
+              <div class="card-body">
+                <h2 class="text-center">{{ post.title }}</h2>
+              <br><br>
+              <p class="text-center">{{ post.description }}</p>
+                <img class="card-img-bottom" src="{{ post.image.url }}" alt="Card image cap">
+                <a class="button-flux" href="{% url 'response_ticket' post.id %}"><button type="submit " >Créer une critique</button></a>
+              </div>
+            </div>
+        </div>
+            {% endif %}
+        {% endif %}
         {% if post.contente_type == "REVIEW" %}
         <div class="col-7 mt-4">
             <div class="card w-75">
@@ -24,12 +39,10 @@
                         <h4 class="text-titre">Ticket - {{ post.ticket.user }}</h4>
                         <h4 class="text-titre">{{ post.ticket.title }}</h4>
                         <img class="card-img-bottom" src="{{ post.ticket.image.url }}" alt="Card image cap">
-                        <a class="button-flux" href="{% url 'response_ticket' post.id %}"><button type="submit " >Créer une critique</button></a>
                     </div>
               </div>
             </div>
         </div>
-
         {% endif %}
     </div>
 </div>

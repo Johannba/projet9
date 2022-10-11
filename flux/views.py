@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from itertools import chain
 from . import forms
 from . import models
-from .forms import ReviewForm
+from .forms import ReviewForm, TicketForm
 from .models import Ticket, Review
 
 
@@ -102,11 +102,24 @@ def ticket_review(request):
 class EditReview(UpdateView):
     model = Review
     form_class = ReviewForm
-    template_name = "flux/edit_ticket.html"
+    template_name = "flux/edit_review.html"
     success_url = reverse_lazy("posts")
+
+
+def delete_review(request, ticket_id):
+    review = Review.objects.get(id__exact=ticket_id)
+    review.delete()
+    return redirect('posts')
 
 
 def delete_ticket(request, ticket_id):
     ticket = Ticket.objects.get(id__exact=ticket_id)
     ticket.delete()
     return redirect('posts')
+
+
+class EditTicket(UpdateView):
+    model = Ticket
+    form_class = TicketForm
+    template_name = "flux/edit_ticket.html"
+    success_url = reverse_lazy("posts")

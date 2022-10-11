@@ -28,6 +28,12 @@ urlpatterns = [
         'delete_ticket/<int:ticket_id>/',
         flux.views.delete_ticket,
         name='delete_ticket'),
+    path(
+        'delete_review/<int:ticket_id>/',
+        flux.views.delete_review,
+        name='delete_review'),
+    path('edit_review/<int:pk>/', flux.views.EditReview.as_view(), name='edit_review'),
+    path('edit_ticket/<int:pk>/', flux.views.EditTicket.as_view(), name='edit_ticket'),
 ]
 
 if settings.DEBUG:

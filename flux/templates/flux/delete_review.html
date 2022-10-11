@@ -7,8 +7,6 @@
                  <p class="livre-article">Livre/ Article</p>
     <form method="post" enctype="multipart/form-data">
         {{ ticket_form.as_p }}
-        <p class="livre-article">Critique</p>
-        {{ review_form.as_p }}
         {% csrf_token %}
         <button class="button-review" type="submit" >Envoyer</button>
     </form>
