@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
-<head>
-    <meta charset="UTF-8">
-    <title>Followers</title>
-</head>
-<body>
-
-</body>
-</html>
+<form action="{% url 'follows' %}" method="post">
+    {% csrf_token %}
+    <input class="form-control text-center" type="text" name="username" placeholder="Nom d'utilisateur">
+    <button class="btn btn-primary">Envoyer</button>
+</form>
