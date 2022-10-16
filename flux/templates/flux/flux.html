@@ -22,9 +22,12 @@
               <br><br>
               <p class="text-center">{{ post.description }}</p>
                   <img class="card-img-bottom" src="{{ post.image.url }}" alt="Card image cap">
-                  <a class="button-flux" href="{% url 'response_ticket' post.id %}"><button type="submit " >Créer une critique</button></a>
-                {% endif %}
+                  {% if ticket.is_reviewed == False %}
+                        <a class="button-flux" href="{% url 'response_ticket' post.id %}"><button type="submit " >Créer une critique</button></a>
+                    {% endif %}
+                  {% endif %}
         {% if post.contente_type == "REVIEW" %}
+
         <div class="col-7 mt-4">
             <div class="card w-75">
               <div class="card-body">
